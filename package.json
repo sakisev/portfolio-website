@@ -38,5 +38,8 @@
         "@oclif/core": {
             "minimatch": "^11.0.9"
         }
+    },
+    "engines": {
+        "node": ">=22"
     }
 }
