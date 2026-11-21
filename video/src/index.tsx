@@ -18,6 +18,7 @@ const C = { stage: '#000000', bone: '#ede8de', ash: '#9a958b', marigold: '#f2a92
 const display = loadDisplay('normal', { weights: ['800'] }).fontFamily;
 const sans = loadSans('normal', { weights: ['400', '500'] }).fontFamily;
 
+const QUESTION = 90;
 const INTRO = 75;
 const SCENE = 105;
 const OUTRO = 90;
@@ -25,8 +26,8 @@ const OUTRO = 90;
 // Real screenshots from the review demo account (Alex & Sam). No pet screens: they show third-party characters.
 const scenes = [
     { file: 'alex-chat.png', title: 'A chat for two', body: 'End-to-end encrypted messages, photos and voice notes.', color: C.tomato },
-    { file: 'alex-play.png', title: 'Play together', body: 'Mini games and a daily question that earn you LU.', color: C.marigold },
-    { file: 'alex-wallet.png', title: 'Spend your LU', body: 'Set shared rewards and redeem them with LU.', color: C.lilac },
+    { file: 'alex-play.png', title: 'Play together', body: 'Mini games and a daily question that earn you Love Units.', color: C.marigold },
+    { file: 'alex-wallet.png', title: 'Spend your LU', body: 'Love Units you earn together, spent on rewards you set as a couple.', color: C.lilac },
     { file: 'alex-emoji-riddle.png', title: 'Say it in emojis', body: 'Emoji riddles, draw & guess, two truths and a lie, and more.', color: C.petrol },
 ];
 
@@ -57,6 +58,22 @@ const Ticket = ({ children, bg }: { children: string; bg: string }) => (
     </div>
 );
 
+// Opening beat: the idea the whole app is built on.
+const Question = () => {
+    const a = useEnter(0);
+    const b = useEnter(30);
+    return (
+        <AbsoluteFill style={{ background: C.stage, padding: 140, justifyContent: 'center', gap: 48 }}>
+            <div style={{ opacity: a, transform: `translateY(${(1 - a) * 30}px)` }}>
+                <Title size={170}>How does one measure love?</Title>
+            </div>
+            <div style={{ fontFamily: sans, fontSize: 64, color: C.marigold, opacity: b, transform: `translateY(${(1 - b) * 30}px)` }}>
+                What if there was a currency for it?
+            </div>
+        </AbsoluteFill>
+    );
+};
+
 const Intro = () => {
     const a = useEnter(0);
     const b = useEnter(12);
@@ -70,7 +87,9 @@ const Intro = () => {
                     <Title size={380} color={C.tomato}>LU Chat</Title>
                 </div>
             </div>
-            <div style={{ fontFamily: sans, fontSize: 56, color: C.bone, opacity: b }}>Your little corner of the internet, for two</div>
+            <div style={{ fontFamily: sans, fontSize: 56, color: C.bone, opacity: b }}>
+                <span style={{ color: C.marigold }}>LU = Love Units.</span> Your little corner of the internet, for two
+            </div>
         </AbsoluteFill>
     );
 };
@@ -124,15 +143,18 @@ const Outro = () => {
 
 const LuChatDemo = () => (
     <AbsoluteFill style={{ background: C.stage }}>
-        <Sequence durationInFrames={INTRO}>
+        <Sequence durationInFrames={QUESTION}>
+            <Question />
+        </Sequence>
+        <Sequence from={QUESTION} durationInFrames={INTRO}>
             <Intro />
         </Sequence>
         {scenes.map((s, i) => (
-            <Sequence key={s.file} from={INTRO + i * SCENE} durationInFrames={SCENE}>
+            <Sequence key={s.file} from={QUESTION + INTRO + i * SCENE} durationInFrames={SCENE}>
                 <Scene {...s} index={i} />
             </Sequence>
         ))}
-        <Sequence from={INTRO + scenes.length * SCENE} durationInFrames={OUTRO}>
+        <Sequence from={QUESTION + INTRO + scenes.length * SCENE} durationInFrames={OUTRO}>
             <Outro />
         </Sequence>
     </AbsoluteFill>
@@ -142,7 +164,7 @@ registerRoot(() => (
     <Composition
         id='LuChatDemo'
         component={LuChatDemo}
-        durationInFrames={INTRO + scenes.length * SCENE + OUTRO}
+        durationInFrames={QUESTION + INTRO + scenes.length * SCENE + OUTRO}
         fps={30}
         width={1920}
         height={1080}
