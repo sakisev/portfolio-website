@@ -1,3 +1,4 @@
+import DemoVideo from '@/components/demo-video';
 import { getProjectById } from '@/sanity/sanity-utils';
 import { PortableText } from '@portabletext/react';
 import type { Metadata } from 'next';
@@ -42,17 +43,11 @@ export default async function LuChatPage() {
             {project?.video && (
                 <section aria-label='Demo video' className='px-4 sm:px-8'>
                     <div className='film-frame aspect-video'>
-                        <video
+                        <DemoVideo
                             src={project.video}
                             poster={project.videoPoster}
-                            controls
-                            muted
-                            playsInline
-                            preload='none'
-                            className='absolute inset-0 size-full object-cover'
-                        >
-                            A short demo of LU Chat&apos;s chat, games and LU wallet.
-                        </video>
+                            label="Demo of LU Chat: the chat, games and Love Units wallet"
+                        />
                     </div>
                 </section>
             )}
