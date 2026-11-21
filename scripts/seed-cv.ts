@@ -101,13 +101,15 @@ tx.patch('project-lu-chat', (p) =>
         href: '/lu-chat',
         status: 'Ongoing',
         short_description:
-            'A private iOS and Android app for couples: an end-to-end encrypted chat, mini games, shared lists, a shared pet and a points currency called LU. Opening soon as an invite-only beta.',
+            'How do you measure love? LU Chat answers with a currency for it: Love Units, earned and spent by two people in a private, end-to-end encrypted app for couples.',
         stack: ['Expo', 'Expo Router', 'TypeScript', 'Supabase', 'NativeWind', 'TanStack Query'],
         content: blocks(
-            'LU Chat is a private app for two. Partners pair their phones with a one-time code and get a space that is only theirs: an end-to-end encrypted chat, mini games, a daily question, shared lists, important dates, a shared pet, and LU, a little points currency you earn by playing together and spend on rewards you set up as a couple.',
-            'Privacy is the core of the design. Messages, photos, voice notes, shared lists, daily answers and the written games are encrypted on the device with libsodium before they leave it, with keys that exist only on the two phones, so the server stores that content without being able to read it. Photos are deleted from the server shortly after they are viewed, and there are no analytics, ads or tracking SDKs.',
-            'It is built with Expo and Expo Router in TypeScript. Supabase provides auth, Postgres with row-level security, Realtime and Edge Functions; TanStack Query and Realtime keep both phones in sync; NativeWind handles light and dark themes; and Expo Notifications delivers push. Home-screen widgets show lists, countdowns and streaks at a glance.',
-            'LU Chat is opening soon as an invite-only beta on TestFlight and Google Play.',
+            'How does one measure love? Not in likes, not in read receipts, not in how fast someone texts back. But what if there was a currency for it? LU Chat starts from that question. LU stands for Love Units: a little currency that only two people can earn, and only spend on each other.',
+            'Answer the daily question, play a round together, complete an activity, and LU lands in your wallet. Send some to your partner just because. Then spend it on rewards you invent as a couple, from "I pick the movie" to "Skip one chore" to breakfast in bed, so the small gestures that usually go uncounted finally have a balance.',
+            'Around that currency sits a space that belongs to the two of you and nobody else: a private chat, mini games, shared lists, the dates that matter, and a pet you raise together. Partners pair their phones with a one-time code, and that is the whole guest list.',
+            'Love letters deserve privacy. Messages, photos, voice notes, shared lists, daily answers and the written games are encrypted on the device with libsodium before they leave it, with keys that exist only on the two phones, so the server keeps that content without being able to read it. Photos are deleted from the server shortly after they are viewed, and there are no analytics, ads or tracking SDKs.',
+            'Under the hood it is Expo and Expo Router in TypeScript. Supabase provides auth, Postgres with row-level security, Realtime and Edge Functions; TanStack Query and Realtime keep both phones in sync; NativeWind handles light and dark themes; Expo Notifications delivers push; and home-screen widgets keep lists, countdowns and streaks a glance away.',
+            'LU Chat opens soon as an invite-only beta on TestFlight and Google Play. Bring your favourite person.',
         ),
     }),
 );
