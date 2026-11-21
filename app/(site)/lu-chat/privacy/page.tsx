@@ -39,6 +39,7 @@ export default function LuChatPrivacyPage() {
                         <tr><td>Content that isn't end-to-end encrypted: activity and reward titles, important dates and their titles, your pet's name and care history, reactions, LU amounts, choices in Would you rather, This or that, How well do you know me and tic-tac-toe, streaks, read receipts and timestamps</td><td>These features need the server to read this information, for example to pay out LU, keep streaks or send reminders. It is only visible to you and your partner, and it is encrypted at rest by our hosting provider.</td></tr>
                         <tr><td>Push notification token</td><td>To send you notifications about your partner's activity. Notifications for encrypted content don't include that content.</td></tr>
                         <tr><td>Your device's encryption public key</td><td>So your partner's app can encrypt messages for you. It cannot be used to read anything on its own.</td></tr>
+                        <tr><td>Feedback you choose to send from Settings, with your account ID, phone model, operating system and app version</td><td>To fix bugs and improve the app. Feedback isn't end-to-end encrypted.</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -53,6 +54,7 @@ export default function LuChatPrivacyPage() {
                 <li><strong>Expo</strong> relays push notifications to Apple Push Notification service and Google Firebase Cloud Messaging, and delivers app updates.</li>
                 <li><strong>Resend</strong> delivers sign-in code emails.</li>
                 <li><strong>Apple</strong>, if you use Sign in with Apple.</li>
+                <li><strong>GitHub</strong> stores feedback you send from the app, in our private issue tracker.</li>
                 <li><strong>GIPHY</strong>: when you search for GIFs, your search terms go directly from your phone to GIPHY, which also sees your IP address. See GIPHY's privacy policy.</li>
                 <li><strong>Link previews</strong>: when you send a link, our server fetches that web page to build a preview card, so the website sees our server rather than your device. The link itself is sent end-to-end encrypted.</li>
             </ul>
@@ -63,7 +65,7 @@ export default function LuChatPrivacyPage() {
                 <li>Photos are deleted from our servers 15 minutes after your partner views them, or after 7 days if they're never opened. Voice notes are deleted 7 days after they're sent.</li>
                 <li>While you're paired, your shared history is kept so you can both see it.</li>
                 <li>If you or your partner unpair, the couple's shared history is archived: neither of you can see it anymore, and it isn't shown to anyone you pair with next. It stays stored until the account of whoever wrote it is deleted.</li>
-                <li>If you delete your account (Settings &rarr; Delete account, or from the pairing screen), we delete your account, profile and everything you've written or sent, including from an ex-partner's archive. This happens immediately. Copies in our hosting provider's backups are overwritten within its backup retention period.</li>
+                <li>If you delete your account (Settings &rarr; Delete account, or from the pairing screen), we delete your account, profile and everything you've written or sent, including from an ex-partner's archive. This happens immediately. Feedback you've sent is kept separately in our issue tracker; email us if you'd like it deleted too. Copies in our hosting provider's backups are overwritten within its backup retention period.</li>
             </ul>
 
             <h2>Your rights</h2>
