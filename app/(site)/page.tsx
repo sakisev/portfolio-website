@@ -1,28 +1,30 @@
-import Footer from '@/components/footer';
-import Header from '@/components/header';
-import ContactSection from '@/components/sections/contact';
-import ProjectsSection from '@/components/sections/projects';
-import SkillsSection from '@/components/sections/skills';
-import WorkSection from '@/components/sections/work';
-import {
-    getHomepageHeader,
-    getProjects,
-    getWorkExperienceItems,
-} from '@/sanity/sanity-utils';
+import Career from '@/components/sections/career';
+import Contact from '@/components/sections/contact';
+import Hero from '@/components/sections/hero';
+import Projects from '@/components/sections/projects';
+import Skills from '@/components/sections/skills';
+import { getHomepageHeader, getProjects, getSkillGroups, getWorkExperienceItems } from '@/sanity/sanity-utils';
+
+// Pick up Studio edits without a redeploy.
+export const revalidate = 60;
 
 export default async function Home() {
-    const cards = await getWorkExperienceItems();
-    const projects = await getProjects();
-    const homePage = await getHomepageHeader();
+    const [header, career, projects, skills] = await Promise.all([
+        getHomepageHeader(),
+        getWorkExperienceItems(),
+        getProjects(),
+        getSkillGroups(),
+    ]);
 
     return (
-        <main>
-            <Header {...homePage} />
-            <WorkSection cards={cards} />
-            <ProjectsSection projects={projects} />
-            <SkillsSection />
-            {/*<ContactSection />*/}
-            <Footer />
-        </main>
+        <>
+            <main>
+                <Hero {...header} career={career} />
+                <Career items={career} />
+                <Projects projects={projects} />
+                <Skills groups={skills} />
+            </main>
+            <Contact gitHubUrl={header?.gitHubUrl} linkedInUrl={header?.linkedInUrl} />
+        </>
     );
 }

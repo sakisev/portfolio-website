@@ -1,10 +1,14 @@
-import { HomepageHeader, Page, Project, WorkExperience } from '@/lib/types';
+import { HomepageHeader, Page, Project, SkillGroup, WorkExperience } from '@/lib/types';
 import client from '@/sanity/config/client-config';
 import { groq } from 'next-sanity';
 
 export const getWorkExperienceItems = async (): Promise<WorkExperience[]> => {
-    return client.fetch(groq`*[_type=="work_experience"]{
+    return client.fetch(groq`*[_type=="work_experience"] | order(order asc, _createdAt desc){
         _id,
+        company,
+        years,
+        roles,
+        highlights,
         _createdAt,
         name,
         "slug": slug.current,
@@ -22,6 +26,7 @@ export const getWorkExperienceItem = async (
     return client.fetch(
         groq`*[_type == "work_experience" && slug.current == $slug][0]{
         _id,
+        company,
         _createdAt,
         name,
         "slug": slug.current,
@@ -36,8 +41,11 @@ export const getWorkExperienceItem = async (
 };
 
 export const getProjects = async (): Promise<Project[]> => {
-    return client.fetch(groq`*[_type=="project"]{
+    return client.fetch(groq`*[_type=="project"] | order(order asc, _createdAt desc){
         _id,
+        status,
+        stack,
+        href,
         _createdAt,
         name,
         "slug": slug.current,
@@ -62,6 +70,14 @@ export const getProject = async (slug: string): Promise<Project> => {
     }`,
         { slug },
     );
+};
+
+export const getSkillGroups = async (): Promise<SkillGroup[]> => {
+    return client.fetch(groq`*[_type=="skill_group"] | order(order asc){
+        _id,
+        title,
+        items
+    }`);
 };
 
 export const getPages = async (): Promise<Page[]> => {

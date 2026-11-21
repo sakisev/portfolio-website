@@ -1,35 +1,23 @@
-import SkillItem from '@/components/ui/skill-item';
-import { LogoReact, NextFilled } from '@carbon/icons-react';
-import { LogoTsIcon } from '@sanity/icons';
+import { SkillGroup } from '@/lib/types';
 
-export default function SkillsSection() {
+export default function Skills({ groups }: { groups: SkillGroup[] }) {
     return (
-        <section
-            id='skills'
-            className='py-12 md:py-24 lg:py-32 flex justify-center'
-        >
-            <div className='container px-4 md:px-6'>
-                <div className='space-y-4'>
-                    <h2 className='text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl'>
-                        Skills
-                    </h2>
-                    <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-                        <SkillItem skill={'ReactJS'}>
-                            <LogoReact className='w-6 h-6' />
-                        </SkillItem>
-                        <SkillItem skill={'React Native'}>
-                            <LogoReact className='w-6 h-6' />
-                        </SkillItem>
-                        <SkillItem skill={'Typescript'}>
-                            <LogoTsIcon className='w-6 h-6' />
-                        </SkillItem>
-                        <SkillItem skill={'NextJS'}>
-                            <NextFilled />
-                        </SkillItem>
-                        <SkillItem skill={'CSS/SCSS'} />
+        <section id='skills' aria-labelledby='skills-title' className='bg-petrol px-4 py-20 sm:px-8 lg:py-28'>
+            <h2 id='skills-title' className='display mb-12 text-[clamp(3.5rem,12vw,11rem)]'>
+                Skills
+            </h2>
+            <dl className='grid border-l border-t border-dashed border-bone/30 sm:grid-cols-2 lg:grid-cols-3'>
+                {groups.map(({ _id, title, items }) => (
+                    <div key={_id} className='border-b border-r border-dashed border-bone/30 p-6'>
+                        <dt className='mb-4 text-sm text-bone/80'>{title}</dt>
+                        {items?.map((s) => (
+                            <dd key={s} className='display text-4xl leading-[0.95]'>
+                                {s}
+                            </dd>
+                        ))}
                     </div>
-                </div>
-            </div>
+                ))}
+            </dl>
         </section>
     );
 }

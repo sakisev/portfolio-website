@@ -2,7 +2,22 @@ const projectSchema = {
     name: 'project',
     title: 'Projects',
     type: 'document',
+    orderings: [{ title: 'Display order', name: 'order', by: [{ field: 'order', direction: 'asc' }] }],
     fields: [
+        {
+            name: 'status',
+            title: 'Status',
+            type: 'string',
+            options: { list: ['Ongoing', 'Paused', 'Live'], layout: 'radio' },
+        },
+        { name: 'stack', title: 'Stack', type: 'array', of: [{ type: 'string' }], options: { layout: 'tags' } },
+        {
+            name: 'href',
+            title: 'Page path',
+            type: 'string',
+            description: 'Optional site path for projects with their own page, e.g. /lu-chat. Overrides the default /project/<slug> link.',
+        },
+        { name: 'order', title: 'Display order', type: 'number', description: 'Lower numbers appear first' },
         {
             name: 'name',
             title: 'Name',

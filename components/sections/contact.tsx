@@ -1,47 +1,31 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-
-export default function ContactSection() {
+export default function Contact({ gitHubUrl, linkedInUrl }: { gitHubUrl?: string; linkedInUrl?: string }) {
     return (
-        <section
-            id='contact'
-            className='py-12 md:py-24 lg:py-32 border-t flex justify-center'
-        >
-            <div className='container px-4 md:px-6'>
-                <div className='space-y-4'>
-                    <h2 className='text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl'>
-                        Get in Touch
-                    </h2>
-                    <div className='mx-auto w-full max-w-sm space-y-2'>
-                        <form className='grid gap-4'>
-                            <div className='grid gap-1'>
-                                <Label htmlFor='name'>Name</Label>
-                                <Input id='name' placeholder='Your name' />
-                            </div>
-                            <div className='grid gap-1'>
-                                <Label htmlFor='email'>Email</Label>
-                                <Input
-                                    id='email'
-                                    type='email'
-                                    placeholder='ash@example.com'
-                                />
-                            </div>
-                            <div className='grid gap-1'>
-                                <Label htmlFor='message'>Message</Label>
-                                <Textarea
-                                    id='message'
-                                    placeholder='Your message...'
-                                />
-                            </div>
-                            <Button type='submit' className='w-full'>
-                                Send Message
-                            </Button>
-                        </form>
-                    </div>
-                </div>
+        <footer id='contact' className='bg-oxblood px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-24 sm:px-8 lg:pt-36'>
+            <h2 className='display text-[clamp(3.5rem,15vw,15rem)]'>Get in touch</h2>
+            <div className='mt-10 flex flex-col justify-between gap-10 md:flex-row md:items-end'>
+                <p className='max-w-md text-pretty text-lg'>
+                    Happy to talk about frontend architecture, leading teams, or a role you think I&apos;d fit.
+                </p>
+                <ul className='display flex gap-8 text-4xl sm:text-5xl'>
+                    {linkedInUrl && (
+                        <li>
+                            <a href={linkedInUrl} target='_blank' rel='noopener noreferrer' className='underline decoration-2 underline-offset-8 hover:decoration-transparent'>
+                                LinkedIn
+                            </a>
+                        </li>
+                    )}
+                    {gitHubUrl && (
+                        <li>
+                            <a href={gitHubUrl} target='_blank' rel='noopener noreferrer' className='underline decoration-2 underline-offset-8 hover:decoration-transparent'>
+                                GitHub
+                            </a>
+                        </li>
+                    )}
+                </ul>
             </div>
-        </section>
+            <p className='mt-24 border-t border-dashed border-bone/40 pt-4 text-xs'>
+                &copy; {new Date().getFullYear()} Sakis Evangelou, Nicosia, Cyprus
+            </p>
+        </footer>
     );
 }
