@@ -92,17 +92,25 @@ tx.patch(EXISTING.overflow, (p) =>
 // Retired projects (removed from the portfolio).
 tx.delete('project-workout-companion');
 tx.delete('project-agile-plus');
-tx.createOrReplace({
-    _id: 'project-lu-chat',
-    _type: 'project',
-    order: 1,
-    name: 'LU Chat',
-    href: '/lu-chat',
-    status: 'Ongoing',
-    short_description:
-        'A private iOS and Android app for couples: an end-to-end encrypted chat, mini games, shared lists, a shared pet and a points currency called LU. Opening soon as an invite-only beta.',
-    stack: ['Expo', 'Expo Router', 'TypeScript', 'Supabase', 'NativeWind', 'TanStack Query'],
-});
+// createIfNotExists + patch so media attached by scripts/lu-chat-media.ts survives re-runs.
+tx.createIfNotExists({ _id: 'project-lu-chat', _type: 'project', name: 'LU Chat' });
+tx.patch('project-lu-chat', (p) =>
+    p.set({
+        order: 1,
+        name: 'LU Chat',
+        href: '/lu-chat',
+        status: 'Ongoing',
+        short_description:
+            'A private iOS and Android app for couples: an end-to-end encrypted chat, mini games, shared lists, a shared pet and a points currency called LU. Opening soon as an invite-only beta.',
+        stack: ['Expo', 'Expo Router', 'TypeScript', 'Supabase', 'NativeWind', 'TanStack Query'],
+        content: blocks(
+            'LU Chat is a private app for two. Partners pair their phones with a one-time code and get a space that is only theirs: an end-to-end encrypted chat, mini games, a daily question, shared lists, important dates, a shared pet, and LU, a little points currency you earn by playing together and spend on rewards you set up as a couple.',
+            'Privacy is the core of the design. Messages, photos, voice notes, shared lists, daily answers and the written games are encrypted on the device with libsodium before they leave it, with keys that exist only on the two phones, so the server stores that content without being able to read it. Photos are deleted from the server shortly after they are viewed, and there are no analytics, ads or tracking SDKs.',
+            'It is built with Expo and Expo Router in TypeScript. Supabase provides auth, Postgres with row-level security, Realtime and Edge Functions; TanStack Query and Realtime keep both phones in sync; NativeWind handles light and dark themes; and Expo Notifications delivers push. Home-screen widgets show lists, countdowns and streaks at a glance.',
+            'LU Chat is opening soon as an invite-only beta on TestFlight and Google Play.',
+        ),
+    }),
+);
 tx.patch(EXISTING.thisWebsite, (p) =>
     p.set({
         order: 99, // always last

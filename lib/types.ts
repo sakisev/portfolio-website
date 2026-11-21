@@ -28,6 +28,9 @@ export interface Project {
     status?: 'Ongoing' | 'Paused' | 'Live';
     stack?: string[];
     href?: string;
+    gallery?: { url: string; alt?: string; width: number; height: number }[];
+    video?: string;
+    videoPoster?: string;
     image?: string;
     short_description: string;
     url?: string;

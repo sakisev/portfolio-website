@@ -72,6 +72,24 @@ export const getProject = async (slug: string): Promise<Project> => {
     );
 };
 
+export const getProjectById = async (id: string): Promise<Project | null> => {
+    return client.fetch(
+        groq`*[_type == "project" && _id == $id][0]{
+        _id,
+        _createdAt,
+        name,
+        status,
+        stack,
+        short_description,
+        content,
+        "gallery": gallery[]{ "url": asset->url, alt, "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height },
+        "video": video.asset->url,
+        "videoPoster": videoPoster.asset->url
+    }`,
+        { id },
+    );
+};
+
 export const getSkillGroups = async (): Promise<SkillGroup[]> => {
     return client.fetch(groq`*[_type=="skill_group"] | order(order asc){
         _id,

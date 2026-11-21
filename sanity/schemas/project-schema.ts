@@ -53,6 +53,14 @@ const projectSchema = {
             type: 'string',
         },
         {
+            name: 'gallery',
+            title: 'Screenshots',
+            type: 'array',
+            of: [{ type: 'image', fields: [{ name: 'alt', title: 'Alt', type: 'string' }] }],
+        },
+        { name: 'video', title: 'Demo video', type: 'file', options: { accept: 'video/mp4' } },
+        { name: 'videoPoster', title: 'Demo video poster', type: 'image' },
+        {
             name: 'content',
             title: 'Content',
             type: 'array',

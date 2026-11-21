@@ -1,0 +1,16 @@
+{
+    "name": "lu-chat-demo-video",
+    "private": true,
+    "scripts": {
+        "studio": "remotion studio",
+        "render": "remotion render LuChatDemo out/lu-chat-demo.mp4 --codec=h264 --crf=26",
+        "poster": "remotion still LuChatDemo out/lu-chat-demo-poster.jpg --frame=135 --image-format=jpeg"
+    },
+    "dependencies": {
+        "@remotion/cli": "4.0.545",
+        "@remotion/google-fonts": "4.0.545",
+        "react": "19.3.1",
+        "react-dom": "19.3.1",
+        "remotion": "4.0.545"
+    }
+}
